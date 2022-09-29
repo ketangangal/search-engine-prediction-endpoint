@@ -1,29 +1,68 @@
 body {
-    font-family: 'Raleway', sans-serif;
-  }
-  .bg-dark {
-    background-color: #105469 !important;
-  }
-  
-  .nav-item:hover {
-    color: #E2B842 !important;
-  }
-  
-  h1 {
-    color: #105469;
-    font-weight: 700;
-  }
-  
-  footer, footer .container .col{
-    height: 200px;
-  }
+  font-family: 'Raleway', sans-serif;
+}
+.bg-dark {
+  background-color: #5256ad !important;
+}
+
+.nav-item:hover {
+  color: #E2B842 !important;
+}
+
+h1 {
+  color: #fff;
+  font-weight: 700;
+}
+
+footer, footer .container .col{
+  height: 200px;
+}
 .custom-navbar{box-shadow: 10px 10px 10px #eee; z-index:500;background-color: #e3f2fd;}
-.nav-link{color: #105469!important;}
+.nav-link{color: #fff!important;}
 .navbar-brand span{
-  color: #105469!important;
-  font-weight: 800;
-    font-size: 24px;
+color: #fff!important;
+font-weight: 800;
+  font-size: 24px;
 }
 
 @media only screen and (max-width: 760px) { #logo_custom{width: 40%;}}
-                          
+.imageContainer{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  min-height: 100vh;
+  background: #dcdcdc;
+}
+.container2{
+  position: relative;
+  width: 1200px;
+  display: grid;
+  grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+  grid-gap:20px;
+  padding: 20px;
+}
+.container2 .card{
+  width: 100%;
+  background: #fff;
+}
+.container2 .card .imgBx{
+  position: relative;
+  width: 100%;
+  height: 310px;
+  overflow: hidden;
+}
+.container2 .card .imgBx img{
+  width: 100%;
+  height: 100%;
+  top: 0;
+  position: absolute;
+  left: 0;
+  object-fit: cover;
+  transition: 0.5s ease-in-out;
+  transform-origin: right;
+  padding: 2%;
+}
+
+.container2 .card:hover .imgBx img{
+  transform: scale(1.5);
+}

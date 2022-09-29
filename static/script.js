@@ -4,6 +4,8 @@ const form = document.querySelector("form"),
 dragText = dropArea.querySelector("header"),
 button = dropArea.querySelector("button"),
 input = dropArea.querySelector("input")
+//let button_image_search = document.querySelector("#image_search");
+//button_image_search.disabled = true;
 
 let file; //this is a global variable and we'll use it inside multiple functions
 
@@ -74,3 +76,4 @@ function myFunction() {
     x.style.display = "none";
   }
 }
+
