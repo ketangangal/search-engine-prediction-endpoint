@@ -4,7 +4,6 @@ const form = document.querySelector("form"),
 dragText = dropArea.querySelector("header"),
 button = dropArea.querySelector("button"),
 input = dropArea.querySelector("input")
-let search_image_btn = document.querySelector("searchImages_btn");
 
 let file; //this is a global variable and we'll use it inside multiple functions
 
@@ -49,9 +48,11 @@ function showFile(){
     let fileReader = new FileReader(); //creating new FileReader object
     fileReader.onload = ()=>{
       let fileURL = fileReader.result; //passing user file source in fileURL variable
+        // UNCOMMENT THIS BELOW LINE. I GOT AN ERROR WHILE UPLOADING THIS POST SO I COMMENTED IT
        let imgTag = `<img src="${fileURL}" alt="image">`; //creating an img tag and passing user selected file source inside src attribute
       dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
-      displayHideFunction();
+      myFunction();
+    }
     fileReader.readAsDataURL(file);
   }else{
     alert("This is not an Image File!");
@@ -63,16 +64,7 @@ function showFile(){
   let data = new FormData(form);
   console.log(data)
   xhr.send(data);
-}
 
-function displayHideFunction() {
-  var x = document.getElementById("btn_area");
-  document.getElementById("searchImages_btn").disabled = true;
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
 }
 function myFunction() {
   var x = document.getElementById("btn_area");
