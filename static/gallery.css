@@ -1,0 +1,29 @@
+body {
+    font-family: 'Raleway', sans-serif;
+  }
+  .bg-dark {
+    background-color: #105469 !important;
+  }
+  
+  .nav-item:hover {
+    color: #E2B842 !important;
+  }
+  
+  h1 {
+    color: #105469;
+    font-weight: 700;
+  }
+  
+  footer, footer .container .col{
+    height: 200px;
+  }
+.custom-navbar{box-shadow: 10px 10px 10px #eee; z-index:500;background-color: #e3f2fd;}
+.nav-link{color: #105469!important;}
+.navbar-brand span{
+  color: #105469!important;
+  font-weight: 800;
+    font-size: 24px;
+}
+
+@media only screen and (max-width: 760px) { #logo_custom{width: 40%;}}
+                          

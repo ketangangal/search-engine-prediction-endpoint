@@ -3,24 +3,100 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Image Search App</title>
+      <title>Image Search Engine</title>
       <link rel="stylesheet" href="static/index.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-   </head>
-   <body>
-      <div class="drag-area">
-        <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-        <header>Drag & Drop to Upload File</header>
-        <span>OR</span>
-        <button>Browse File</button>
-        <form method=post enctype=multipart/form-data>
-         <input type="file" id="upload_file" name="file" hidden>
-        
-     </form>
-        
-      </div>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+      <style>
+        @import url(https://fonts.googleapis.com/css?family=Righteous);
 
-      <script src="static/script.js"></script>
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  }
+
+html, body {
+  height: 100%;
+  }
+  body {
+    text-align: center;
+    background-color: hsla(230,40%,50%,1);
+    }
+  body:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0;
+    height: 100%;
+    }
+
+h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 9em; 
+  text-shadow: .03em .03em 0 hsla(230,40%,50%,1);
+  }
+  h1:after {
+    content: attr(data-shadow);
+    position: absolute;
+    top: .06em; left: .06em;
+    z-index: -1;
+    text-shadow: none;
+    background-image:
+      linear-gradient(
+        45deg,
+        transparent 45%,
+        hsla(48,20%,90%,1) 45%,
+        hsla(48,20%,90%,1) 55%,
+        transparent 0
+        );
+    background-size: .05em .05em;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+    animation: shad-anim 15s linear infinite;
+    }
+
+@keyframes shad-anim {
+  0% {background-position: 0 0}
+  0% {background-position: 100% -100%}
+  }
+      </style>
+   </head>
+   <body onload="javascript:myFunction()">
+    
+    <div class="container">
+      <span id="logo"><img  src="static/logo.png"  class="d-inline-block align-top" alt=""></span>
+      <h1 data-shadow='PicsMan!'>PicsMan!</h1>
+      <div class="container">
+        <div class="drag-area">
+          <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+          <header>Drag & Drop to Upload File</header>
+          <span>OR</span>
+          <button >Browse File</button>
+          <form method=post enctype=multipart/form-data>
+           <input type="file" id="upload_file" name="file" hidden>
+          </form>
+        </div>
+      </div>
       
+    </div>
+    
+      <footer id="btn_area" class="flex-shrink-0 py-4 bg-dark text-white-50" style="position: fixed;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      color: maroon;
+      text-align: center;
+      background: white;">
+        <div class="container text-center" >
+          <a type="submit" href="/gallery" class="btn-white" id="searchImages_btn">Search Images</a>
+          <a type="button" class="btn-white" href="/" >Reload</a>
+        </div>
+      </footer>
+      <script src="static/script.js"></script>
     </body>
 </html>

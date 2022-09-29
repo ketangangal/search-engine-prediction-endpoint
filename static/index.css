@@ -9,15 +9,14 @@
 }
 body{
   display: flex;
-  align-items: center;
   justify-content: center;
   min-height: 100vh;
   background: #5256ad;
 }
+
 .drag-area{
   border: 2px dashed #fff;
   height: 500px;
-  width: 700px;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -58,4 +57,25 @@ body{
   width: 100%;
   object-fit: cover;
   border-radius: 5px;
+}
+.btn-white{
+  padding: 1px 20px;
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  background: #5256ad;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-white:hover {
+  background-color:#fff;
+  transition: 0.7s;
+}
+#logo{
+  display: inline-flex;
+  width: 100px;
+  height: 100px;
 }
