@@ -16,13 +16,13 @@ async def index(request: Request):
 
 
 @app.post('/image')
-def upload_file(file: UploadFile = File(...)):
+async def upload_file(file: UploadFile = File(...)):
     try:
         contents = file.file.read()
         with open(file.filename, 'wb') as f:
             f.write(contents)
-    except Exception:
-        return {"message": "There was an error uploading the file"}
+    except Exception as e:
+        return {"message": f"There was an error uploading the file {e}"}
     finally:
         file.file.close()
 
