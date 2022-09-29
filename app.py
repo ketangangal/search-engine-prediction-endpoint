@@ -49,7 +49,6 @@ def reload():
 @app.get('/gallery')
 async def gallery(request: Request):
     global searchedImages
-    print(searchedImages)
     return TEMPLATES.TemplateResponse('gallery.html', context={"request": request, "length": len(searchedImages),
                                                                "searchedImages": searchedImages})
 

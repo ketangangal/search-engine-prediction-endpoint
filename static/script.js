@@ -52,7 +52,6 @@ function showFile(){
        let imgTag = `<img src="${fileURL}" alt="image">`; //creating an img tag and passing user selected file source inside src attribute
       dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
       displayHideFunction();
-    }
     fileReader.readAsDataURL(file);
   }else{
     alert("This is not an Image File!");
@@ -69,6 +68,14 @@ function showFile(){
 function displayHideFunction() {
   var x = document.getElementById("btn_area");
   document.getElementById("searchImages_btn").disabled = true;
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function myFunction() {
+  var x = document.getElementById("btn_area");
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
