@@ -38,6 +38,7 @@ dropArea.addEventListener("drop", (event)=>{
   //getting user select file and [0] this means if user select multiple files then we'll select only the first one
   file = event.dataTransfer.files[0];
   showFile(); //calling function
+
 });
 
 function showFile(){
@@ -50,6 +51,7 @@ function showFile(){
         // UNCOMMENT THIS BELOW LINE. I GOT AN ERROR WHILE UPLOADING THIS POST SO I COMMENTED IT
        let imgTag = `<img src="${fileURL}" alt="image">`; //creating an img tag and passing user selected file source inside src attribute
       dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
+      myFunction();
     }
     fileReader.readAsDataURL(file);
   }else{
@@ -63,4 +65,12 @@ function showFile(){
   console.log(data)
   xhr.send(data);
 
+}
+function myFunction() {
+  var x = document.getElementById("btn_area");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
 }
