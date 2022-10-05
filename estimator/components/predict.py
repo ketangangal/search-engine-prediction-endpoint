@@ -1,4 +1,7 @@
+import os
+from from_root import from_root
 from estimator.components.custom_ann import CustomAnnoy
+from estimator.components.storage_helper import StorageConnection
 from estimator.entity.config import PredictConfig
 from estimator.components.model import NeuralNet
 from torchvision import transforms
@@ -13,13 +16,22 @@ class Prediction(object):
     def __init__(self):
         self.config = PredictConfig()
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.initial_setup()
 
         self.ann = CustomAnnoy(self.config.EMBEDDINGS_LENGTH,
                                self.config.SEARCH_MATRIX)
 
         self.ann.load(self.config.MODEL_PATHS[0][0])
         self.estimator = self.load_model()
+        self.estimator.eval()
         self.transforms = self.transformations()
+
+    @staticmethod
+    def initial_setup():
+        if not os.path.exists(os.path.join(from_root(), "artifacts")):
+            os.makedirs(os.path.join(from_root(), "artifacts"))
+        connection = StorageConnection()
+        connection.get_package_from_testing()
 
     def load_model(self):
         model = NeuralNet()
@@ -53,9 +65,3 @@ class Prediction(object):
         image = image.reshape(1, 3, 256, 256)
         embedding = self.generate_embeddings(image)
         return self.generate_links(embedding[0])
-
-
-if __name__ == "__main__":
-    predict_pipe = Prediction()
-    img_path = r"F:\Production\SearchEngine-PredictionEndpoint\prediction_test.jpg"
-    print(predict_pipe.run_predictions(img_path))

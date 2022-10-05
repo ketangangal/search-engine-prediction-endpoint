@@ -15,6 +15,15 @@ class StorageConnection:
 
     def get_package_from_testing(self):
         print("Fetching Artifacts From S3 Bucket .....")
+        if os.path.exists(self.config.ARTIFACTS_ROOT + "embeddings.ann"):
+            os.remove(self.config.ARTIFACTS_ROOT + "embeddings.ann")
+
+        if os.path.exists(self.config.ARTIFACTS_ROOT + "model.pth"):
+            os.remove(self.config.ARTIFACTS_ROOT + "model.pth")
+
+        if os.path.exists(self.config.ARTIFACTS_ROOT + "embeddings.json"):
+            os.remove(self.config.ARTIFACTS_ROOT + "embeddings.json")
+
         self.bucket.download_file(self.config.ZIP_NAME, self.config.ARTIFACTS_PATH)
         folder = tarfile.open(self.config.ARTIFACTS_PATH)
         folder.extractall(self.config.ARTIFACTS_ROOT)

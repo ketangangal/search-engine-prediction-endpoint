@@ -1,14 +1,15 @@
-from fastapi import FastAPI, Request
-import uvicorn
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi import File, UploadFile
 from estimator.components.predict import Prediction
+from fastapi import FastAPI, Request
+import uvicorn
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"))
 TEMPLATES = Jinja2Templates(directory='templates')
 searchedImages = []
+
 predict_pipe = Prediction()
 
 
@@ -22,9 +23,12 @@ async def index(request: Request):
 async def upload_file(file: UploadFile = File(...)):
     global searchedImages, predict_pipe
     try:
-        contents = file.file.read()
-        searchedImages = predict_pipe.run_predictions(contents)
-        return {"message": "Prediction Completed"}
+        if predict_pipe:
+            contents = file.file.read()
+            searchedImages = predict_pipe.run_predictions(contents)
+            return {"message": "Prediction Completed"}
+        else:
+            return {"message": "First Load Model in Production using reload_prod_model route"}
     except Exception as e:
         return {"message": f"There was an error uploading the file {e}"}
 
@@ -36,10 +40,11 @@ def reload():
     return
 
 
-@app.post('/reload_prod_model')
+@app.get('/reload_prod_model')
 def reload():
     global predict_pipe
     try:
+        del predict_pipe
         predict_pipe = Prediction()
         return {"Response": "Successfully Reloaded"}
     except Exception as e:
@@ -54,4 +59,5 @@ async def gallery(request: Request):
 
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="localhost", port=8080, reload=True)
+    uvicorn.run(app, host="localhost", port=8080)
+

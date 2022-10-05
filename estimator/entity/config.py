@@ -4,10 +4,10 @@ from from_root import from_root
 
 class AwsStorage:
     def __init__(self):
-        self.ACCESS_KEY_ID = ""
-        self.SECRET_KEY = ""
-        self.REGION_NAME = "ap-south-1"
-        self.BUCKET_NAME = "image-database-system"
+        self.ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
+        self.SECRET_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
+        self.REGION_NAME = os.environ["AWS_REGION"]
+        self.BUCKET_NAME = os.environ["AWS_BUCKET_NAME"]
         self.KEY = "model"
         self.ZIP_NAME = "model/artifacts.tar.gz"
         self.ARTIFACTS_ROOT = os.path.join(from_root(), "artifacts")
@@ -27,7 +27,7 @@ class PredictConfig:
         self.IMAGE_SIZE = 256
         self.EMBEDDINGS_LENGTH = 256
         self.SEARCH_MATRIX = 'euclidean'
-        self.NUMBER_OF_PREDICTIONS = 10
+        self.NUMBER_OF_PREDICTIONS = 500
         self.STORE_PATH = os.path.join(from_root(), "artifacts")
         self.MODEL_PATHS = [(os.path.join(from_root(), "artifacts", "embeddings.ann"), "embeddings.ann"),
                             (os.path.join(from_root(), "artifacts", "model.pth"), "model.pth")]
