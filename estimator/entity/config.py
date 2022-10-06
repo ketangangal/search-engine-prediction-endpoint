@@ -27,7 +27,7 @@ class PredictConfig:
         self.IMAGE_SIZE = 256
         self.EMBEDDINGS_LENGTH = 256
         self.SEARCH_MATRIX = 'euclidean'
-        self.NUMBER_OF_PREDICTIONS = 500
+        self.NUMBER_OF_PREDICTIONS = 20
         self.STORE_PATH = os.path.join(from_root(), "artifacts")
         self.MODEL_PATHS = [(os.path.join(from_root(), "artifacts", "embeddings.ann"), "embeddings.ann"),
                             (os.path.join(from_root(), "artifacts", "model.pth"), "model.pth")]
