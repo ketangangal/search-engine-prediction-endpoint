@@ -5,6 +5,7 @@ WORKDIR /searchengine
 
 RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests -y curl
 RUN apt-get -y install python3-dev
+Run apt-get install gcc
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
