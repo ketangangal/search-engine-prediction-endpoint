@@ -1,12 +1,14 @@
 # Prediction Endpoint
 This Repository is a prediction endpoint for Reverse Image Search Engine. With the use of gitHub actions 
 I have configured CI-CD on the main branch. If any changes happens in Main branch it will deploy it on ec2 instance.
-## UI
-![plot](snippets/snip1.png)
 
 ## Architectures 
 ![EndpointArchitecture](https://user-images.githubusercontent.com/40850370/194845911-ea1b68f5-22db-4190-ab94-eca46f6a9d37.png)
 ![Endpoint](https://user-images.githubusercontent.com/40850370/194845906-fc28aeb7-c2b2-4524-8814-4192cd5311bc.png)
+
+## User Interface
+![plot](snippets/snip1.png)
+
 ## Infrastructure Needed
 1. GitHub Actions
 2. Elastic Container Registry
