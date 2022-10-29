@@ -16,11 +16,17 @@ predict_pipe = Prediction()
 @app.get("/", status_code=200)
 @app.post("/")
 async def index(request: Request):
+    """
+    Description : This Route loads the index.html
+    """
     return TEMPLATES.TemplateResponse(name='index.html', context={"request": request})
 
 
 @app.post('/image')
 async def upload_file(file: UploadFile = File(...)):
+    """
+    Description : This Route loads the predictions in a list which will be listed on webpage.
+    """
     global searchedImages, predict_pipe
     try:
         if predict_pipe:
@@ -35,6 +41,9 @@ async def upload_file(file: UploadFile = File(...)):
 
 @app.post('/reload')
 def reload():
+    """
+    Description : This Route resets the predictions in a list for reload.
+    """
     global searchedImages
     searchedImages = []
     return
@@ -42,6 +51,10 @@ def reload():
 
 @app.get('/reload_prod_model')
 def reload():
+    """
+    Description : This Route is Event Triggered or owner controlled to update
+                  the model in prod with minimal downtime.
+    """
     global predict_pipe
     try:
         del predict_pipe
@@ -53,6 +66,9 @@ def reload():
 
 @app.get('/gallery')
 async def gallery(request: Request):
+    """
+    Description : This Route lists all the predicted images on the gallery.html listing depends on prediction.
+    """
     global searchedImages
     return TEMPLATES.TemplateResponse('gallery.html', context={"request": request, "length": len(searchedImages),
                                                                "searchedImages": searchedImages})

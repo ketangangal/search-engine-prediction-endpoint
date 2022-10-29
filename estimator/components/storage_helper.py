@@ -5,6 +5,9 @@ import os
 
 
 class StorageConnection:
+    """
+    Created connection with S3 bucket using boto3 api to fetch the model from Repository.
+    """
     def __init__(self):
         self.config = AwsStorage()
         self.session = Session(aws_access_key_id=self.config.ACCESS_KEY_ID,

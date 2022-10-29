@@ -13,6 +13,9 @@ import io
 
 
 class Prediction(object):
+    """
+    Prediction class Prepares the model endpoint
+    """
     def __init__(self):
         self.config = PredictConfig()
         self.device = "cuda" if torch.cuda.is_available() else "cpu"

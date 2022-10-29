@@ -4,6 +4,9 @@ import torch
 
 
 class NeuralNet(nn.Module):
+    """
+    Neural Network: Replica of the neural network used while training.
+    """
     def __init__(self):
         super().__init__()
         self.config = PredictConfig()
