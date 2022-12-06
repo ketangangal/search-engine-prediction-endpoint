@@ -51,9 +51,6 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
           IMAGE_TAG: production
         run: |
-          # Build a docker container and
-          # push it to ECR so that it can
-          # be deployed to ECS.
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
@@ -79,8 +76,18 @@ jobs:
       - name: Pull App Image
         run: sudo docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:production
 
-      - name: Run Docker Image to serve users
-        run: sudo docker run -d -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} -e AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }} -e AWS_REGION=${{ secrets.AWS_REGION }} -p 8080:8080 ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:production
+      - name: Remove Already Running Container
+        run: docker ps -q --filter "name=production" | grep -q . && docker stop ${IMAGE_NAME} && docker rm -fv ${IMAGE_NAME} || true
 
       - name: Docker System Prune to Remove Old Images
         run: sudo docker system prune -f
+
+      - name: Run Docker Image to serve users
+        run: |
+          sudo docker run --name=production -d \
+          -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+          -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+          -e AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }} \
+          -e AWS_REGION=${{ secrets.AWS_REGION }} \
+          -p 8080:8080 ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:production
+
