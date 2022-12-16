@@ -23,7 +23,7 @@ jobs:
         run: echo "Linting repository"
 
       - name: Run unit tests
-        run: echo "Running unit tests"
+        run: echo "Running unit tests "
 
   build-and-push-ecr-image:
     name: Continuous Delivery
